@@ -13,7 +13,3 @@ function Bubble_Sort(arr) {
 
 	return arr;
 }
-
-const arr0 = [64, 34, 25, 12, 22, 11, 90];
-Bubble_Sort(arr0);
-console.log("Sorted array: " + arr0);
