@@ -14,7 +14,7 @@ It was created for learning, testing, and improving understanding of core comput
         - [**DeQue**](./DeQue)
         - [**Stack**](./Stack)
         - [**Queue**](./Queue)
-        - [**PriorityQueue**](./PriorityQueue)priority.
+        - [**PriorityQueue**](./PriorityQueue)
     - [**Sorting**](./Sorting)
         [Bubble Sort](./Bubble%20Sort)
         [Selection Sort](./Selection%20Sort)
