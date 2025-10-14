@@ -33,13 +33,13 @@ class Queue {
 
 	// interface
 
-	Enqueue(value) {
+	enqueue(value) {
 		if (this.isFull()) {
 			throw new Error("Queue overflow");
 		}
 		this.#writeToBuffer(value);
 	}
-	Dequeue() {
+	dequeue() {
 		if (this.isEmpty()) {
 			throw new Error("Queue underflow");
 		}
