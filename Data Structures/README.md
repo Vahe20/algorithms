@@ -22,4 +22,7 @@ Each data structure resides in its own directory and includes:
 - [**Stack**](./Stack) - A last-in, first-out (LIFO) structure for managing ordered data.
 - [**Queue**](./Queue) - A first-in, first-out (FIFO) structure for orderly processing of elements.
 - [**PriorityQueue**](./PriorityQueue) - A queue where each element has a priority, and elements are served based on priority.
-
+- [**tree**](./tree/)
+    -[**n-ary**](./tree/n-ary/)
+        -[**binary**](./tree/n-ary/binary/)
+            -[**BinarySearchTree**](./tree/n-ary/binary/BinarySearchTree/)

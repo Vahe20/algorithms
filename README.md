@@ -15,6 +15,11 @@ It was created for learning, testing, and improving understanding of core comput
         - [**Stack**](./Data%20Structures/Stack)
         - [**Queue**](./Data%20Structures/Queue)
         - [**PriorityQueue**](./Data%20Structures/PriorityQueue)
+        - [**tree**](./tree/)
+            -[**n-ary**](./tree/n-ary/)
+                -[**binary**](./tree/n-ary/binary/)
+                    -[**BinarySearchTree**](./tree/n-ary/binary/BinarySearchTree/)
+
     - [**Sorting**](./Sorting)
         - [Bubble Sort](./Sorting/Bubble%20Sort)
         - [Selection Sort](./Sorting/Selection%20Sort)
