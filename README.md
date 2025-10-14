@@ -7,8 +7,6 @@ It was created for learning, testing, and improving understanding of core comput
 
 ## 📁 Project Structure
 
-algorithms/
-│
-├── [**Data Structures**](./Data%20Structures)
-│
-└── [**Sorting**](./Sorting)
+- algorithms/
+    - [**Data Structures**](./Data%20Structures)
+    - [**Sorting**](./Sorting)
