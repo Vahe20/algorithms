@@ -9,6 +9,6 @@ It was created for learning, testing, and improving understanding of core comput
 
 algorithms/
 │
-├── [**Data Structures**](./Data%20Structures/DATASTRUCTURES.md)
+├── [**Data Structures**](./Data%20Structures)
 │
-└── [**Sorting**](./Sorting/SORTING.md)
+└── [**Sorting**](./Sorting)
