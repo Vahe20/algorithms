@@ -42,6 +42,7 @@ class BinarySearchTree {
 		else return this.#containsRecursive(current.left, key);
 	}
 
+
 	// interface
 
 	// iterative insert
@@ -190,19 +191,19 @@ class BinarySearchTree {
 			else if (parent.right === current) parent.right = child;
 			else parent.left = child;
 		} else {
-			let successorParent = current;
+			let minElemParent = current;
 			let minElem = current.right;
 
 			while (minElem.left) {
-				successorParent = minElem;
+				minElemParent = minElem;
 				minElem = minElem.left;
 			}
 
 			current.data = minElem.data;
 
-			if (successorParent.left === minElem)
-				successorParent.left = minElem.right;
-			else successorParent.right = minElem.right;
+			if (minElemParent.left === minElem)
+				minElemParent.left = minElem.right;
+			else minElemParent.right = minElem.right;
 		}
 
 		return true;
