@@ -3,11 +3,16 @@ class Queue {
 	#size;
 	#buffer;
 	#head;
+	#dynamic = false;
 
 	constructor(capacity) {
+		if (!capacity) {
+			capacity = 10;
+			this.#dynamic = true;
+		} 
 		this.#capacity = capacity;
-		this.#size = 0;
 		this.#buffer = new Array(capacity);
+		this.#size = 0;
 		this.#head = 0;
 	}
 
@@ -16,6 +21,9 @@ class Queue {
 	#writeToBuffer(value) {
 		this.#buffer[(this.#head + this.#size) % this.#capacity] = value;
 		++this.#size;
+		if (this.#dynamic && this.#size === this.#capacity) {
+			this.resize();
+		}
 	}
 
 	#reedFromBuffer() {
@@ -31,12 +39,24 @@ class Queue {
 		return value;
 	}
 
+	resize() {
+		const newCapacity = this.#capacity * 2;
+		const newBuffer = new Array(newCapacity);
+
+		for (let i = 0; i < this.#size; ++i) {
+			newBuffer[i] = this.#buffer[(this.#head + i) % this.#capacity];
+		}
+
+		this.#buffer = newBuffer;
+		this.#capacity = newCapacity;
+		this.#head = 0;
+	}
+
 	// interface
 
 	enqueue(value) {
-		if (this.isFull()) {
-			throw new Error("Queue overflow");
-		}
+		if (!value) throw new Error("Cannot enqueue undefined value");
+		if (this.isFull()) throw new Error("Queue overflow");
 		this.#writeToBuffer(value);
 	}
 	dequeue() {
@@ -61,8 +81,12 @@ class Queue {
 		return this.#size;
 	}
 	print() {
-		console.log(this.toArray().join(", "));
+		console.log(
+			`Queue(size=${this.#size}, cap=${this.#capacity}):`,
+			this.toArray()
+		);
 	}
+
 	clear() {
 		this.#buffer = new Array(this.#capacity);
 		this.#head = 0;

@@ -15,28 +15,23 @@ class TreeNode {
 class BinarySearchTree {
 	#root;
 
-	constructor() {
+	constructor(data = null) {
 		this.#root = null;
+		if (data) this.#root = new TreeNode(data);
 	}
 
 	//helper
 
 	#insertRecursive(current, key) {
-		if (key > current.data && !current.right) {
-			current.right = new TreeNode(key);
-			return;
-		} else if (key < current.data && !current.left) {
-			current.left = new TreeNode(key);
-			return;
-		}
-
 		if (key > current.data) {
-			this.#insertRecursive(current.right, key);
+			if (!current.right) {
+				current.right = new TreeNode(key);
+			} else this.#insertRecursive(current.right, key);
 		} else if (key < current.data) {
-			this.#insertRecursive(current.left, key);
+			if (!current.left) {
+				current.left = new TreeNode(key);
+			} else this.#insertRecursive(current.left, key);
 		}
-
-		return this.#root;
 	}
 
 	#containsRecursive(current, key) {
@@ -114,15 +109,15 @@ class BinarySearchTree {
 		return this.#containsRecursive(this.#root, key);
 	}
 
-	levelOrder() {
+	levelOrder(root = this.#root) {
 		const result = [];
-		const queue = new Queue(20);
+		const queue = new Queue();
 
-		if (!this.#root) return result;
+		if (!root) return result;
 
-		queue.enqueue(this.#root);
+		queue.enqueue(root);
 
-		while (queue.getSize()) {
+		while (!queue.isEmpty()) {
 			const node = queue.dequeue();
 			result.push(node.data);
 			if (node.left) queue.enqueue(node.left);
@@ -133,14 +128,90 @@ class BinarySearchTree {
 	}
 
 	inOrder() {
-        
-    }
+		const result = [];
 
-	getHeight() {}
-	remove(key) {}
+		function foo(node) {
+			if (!node) return;
+			foo(node.left);
+			result.push(node.data);
+			foo(node.right);
+		}
+
+		foo(this.#root);
+
+		return result;
+	}
+
+	getHeight() {
+		let height = 0;
+
+		if (!this.#root) return height;
+
+		let queue = new Queue();
+
+		queue.enqueue(this.#root);
+
+		while (!queue.isEmpty()) {
+			let level = queue.getSize();
+			++height;
+
+			for (let i = 0; i < level; ++i) {
+				const node = queue.dequeue();
+				if (node.left) queue.enqueue(node.left);
+				if (node.right) queue.enqueue(node.right);
+			}
+		}
+
+		return height;
+	}
+
+	remove(key) {
+		let parent = null;
+		let current = this.#root;
+
+		while (current && current.data !== key) {
+			parent = current;
+			if (key < current.data) current = current.left;
+			else current = current.right;
+		}
+
+		if (!current) return false;
+
+		if (!current.left && !current.right) {
+			if (!parent) this.#root = null;
+			else if (parent.right === current) parent.right = null;
+			else parent.left = null;
+		} else if (
+			(current.left && !current.right) ||
+			(!current.left && current.right)
+		) {
+			const child = current.left || current.right;
+			if (!parent) this.#root = child;
+			else if (parent.right === current) parent.right = child;
+			else parent.left = child;
+		} else {
+			let successorParent = current;
+			let minElem = current.right;
+
+			while (minElem.left) {
+				successorParent = minElem;
+				minElem = minElem.left;
+			}
+
+			current.data = minElem.data;
+
+			if (successorParent.left === minElem)
+				successorParent.left = minElem.right;
+			else successorParent.right = minElem.right;
+		}
+
+		return true;
+	}
+
 	isEmpty() {
 		return this.#root === null;
 	}
+
 	visualizer(node = this.#root, prefix = "", isLeft = true) {
 		if (!node) return;
 
@@ -161,6 +232,10 @@ class BinarySearchTree {
 				true
 			);
 		}
+	}
+
+	clear() {
+		this.#root = null;
 	}
 }
 

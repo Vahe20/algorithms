@@ -6,19 +6,19 @@ queue.enqueue("A");
 queue.enqueue("B");
 queue.enqueue("C");
 
-console.log("['A', 'B', 'C']", queue.toArray().toString() === ["A", "B", "C"].toString()); // [ 'A', 'B', 'C' ]
-console.log("true", queue.isFull()); // true
+console.log("['A', 'B', 'C']", queue.toArray().toString() === ["A", "B", "C"].toString());
+console.log("true", queue.isFull());
 
-console.log("A", queue.dequeue()); // A
-console.log("B", queue.dequeue()); // B
-console.log("C", queue.peek()); // C
+console.log("A", queue.dequeue() === "A");
+console.log("B", queue.dequeue() === "B");
+console.log("C", queue.peek() === "C");
 
 queue.enqueue("D");
-console.log("['C', 'D']", queue.toArray().toString() === ['C', 'D'].toString()); // [ 'C', 'D' ]
+console.log("['C', 'D']", queue.toArray().toString() === ['C', 'D'].toString());
 console.log("2", queue.getSize() === 2); // 2
 
-queue.enqueue("E"); // E
-queue.print(); // C, D, E
+queue.enqueue("E"); 
+queue.print();
 
 queue.clear();
-console.log("true", queue.isEmpty()); // true
+console.log("true", queue.isEmpty());
