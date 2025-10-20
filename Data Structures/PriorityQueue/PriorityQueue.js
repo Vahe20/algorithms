@@ -1,8 +1,11 @@
 class PriorityQueue {
+	#type;
 	#heap;
 
-	constructor() {
+	constructor(iterable = [], type = "min") {
 		this.#heap = [];
+		this.#type = type;
+		for (const item of iterable) this.push(item);
 	}
 
 	// helper
@@ -23,15 +26,17 @@ class PriorityQueue {
 		[this.#heap[i], this.#heap[j]] = [this.#heap[j], this.#heap[i]];
 	}
 
+	#compare(a, b) {
+		return this.#type === "min" ? a < b : a > b;
+	}
+
 	#shiftUp(i) {
 		while (i > 0) {
-			let parent = this.#parent(i);
-			if (this.#heap[i] < this.#heap[parent]) {
+			const parent = this.#parent(i);
+			if (this.#compare(this.#heap[i], this.#heap[parent])) {
 				this.#swap(i, parent);
 				i = parent;
-			} else {
-				break;
-			}
+			} else break;
 		}
 	}
 
@@ -40,20 +45,21 @@ class PriorityQueue {
 		while (true) {
 			const left = this.#left(i);
 			const right = this.#right(i);
+			let target = i;
 
-			let smallest = i;
+			if (left < n && this.#compare(this.#heap[left], this.#heap[target]))
+				target = left;
 
-			if (left < n && this.#heap[left] < this.#heap[smallest])
-				smallest = left;
-			if (right < n && this.#heap[right] < this.#heap[smallest])
-				smallest = right;
+			if (
+				right < n &&
+				this.#compare(this.#heap[right], this.#heap[target])
+			)
+				target = right;
 
-			if (i !== smallest) {
-				this.#swap(i, smallest);
-				i = smallest;
-			} else {
-				break;
-			}
+			if (target !== i) {
+				this.#swap(i, target);
+				i = target;
+			} else break;
 		}
 	}
 
@@ -103,4 +109,4 @@ class PriorityQueue {
 	}
 }
 
-export default PriorityQueue
+export default PriorityQueue;
