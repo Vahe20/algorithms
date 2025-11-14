@@ -43,7 +43,7 @@ console.log(
 	bst.inOrder().toString() === [4, 7].toString()
 );
 
-console.log("Is Empty:", bst.isEmpty() === false);
+console.log("Is Empty:", bst.isEmpty() === false)
 
 bst.remove(4);
 bst.remove(7);

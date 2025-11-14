@@ -22,7 +22,10 @@ Each data structure resides in its own directory and includes:
 - [**Stack**](./Stack) - A last-in, first-out (LIFO) structure for managing ordered data.
 - [**Queue**](./Queue) - A first-in, first-out (FIFO) structure for orderly processing of elements.
 - [**PriorityQueue**](./PriorityQueue) - A queue where each element has a priority, and elements are served based on priority.
-- [**tree**](./tree/)
-    -[**n-ary**](./tree/n-ary/)
-        -[**binary**](./tree/n-ary/binary/)
-            -[**BinarySearchTree**](./tree/n-ary/binary/BinarySearchTree/)
+- [**HashTable**](./HashTable) - A key-value data structure using hashing for fast lookups, insertions, and deletions.
+- [**Tree**](./tree/) - Hierarchical structures for organizing data
+    - [**N-ary Tree**](./tree/n-ary/) - A tree where each node can have multiple children
+        - [**Binary Tree**](./tree/n-ary/binary/) - A tree where each node has at most two children
+            - [**BinarySearchTree**](./tree/n-ary/binary/BinarySearchTree/) - An ordered binary tree for efficient searching.
+            - [**AVLTree**](./tree/n-ary/binary/AVL/) - A self-balancing binary search tree maintaining O(log n) operations.
+            - [**RedBlackTree**](./tree/n-ary/binary/RedBlackTree/) - A self-balancing binary search tree with color properties.

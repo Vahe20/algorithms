@@ -68,6 +68,14 @@ class LinkedList {
 		return sortedHead;
 	}
 
+	*[Symbol.iterator]() {
+		let current = this.#head;
+		while (current) {
+			yield current.data;
+			current = current.next;
+		}
+	}
+
 	// interface
 
 	size() {
@@ -140,6 +148,10 @@ class LinkedList {
 		}
 
 		this.#size--;
+	}
+
+	getHead() {
+		return this.#head;
 	}
 
 	front() {

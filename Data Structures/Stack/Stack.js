@@ -13,7 +13,7 @@ class Stack {
 
     #writeToBuffer(value) {
         this.#buffer[this.#size] = value;
-        this.#size += 1;
+        ++this.#size;
     }
 
     #reedFromBuffer() {
@@ -23,7 +23,7 @@ class Stack {
     #removeFromBuffer() {
         const value = this.#buffer[this.#size - 1];
         this.#buffer[this.#size - 1] = undefined;
-        this.#size -= 1;
+        --this.#size;
 
         return value;
     }

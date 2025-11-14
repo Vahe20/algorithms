@@ -22,26 +22,48 @@ class BinarySearchTree {
 
 	//helper
 
-	#insertRecursive(current, key) {
-		if (key > current.data) {
-			if (!current.right) {
-				current.right = new TreeNode(key);
-			} else this.#insertRecursive(current.right, key);
-		} else if (key < current.data) {
-			if (!current.left) {
-				current.left = new TreeNode(key);
-			} else this.#insertRecursive(current.left, key);
+	#insert(node, key) {
+		if (key > node.data) {
+			if (!node.right) {
+				node.right = new TreeNode(key);
+			} else this.#insert(node.right, key);
+		} else if (key < node.data) {
+			if (!node.left) {
+				node.left = new TreeNode(key);
+			} else this.#insert(node.left, key);
 		}
 	}
 
-	#containsRecursive(current, key) {
+	#contains(current, key) {
 		if (!current) return false;
 		if (current.data === key) return true;
-		if (key > current.data)
-			return this.#containsRecursive(current.right, key);
-		else return this.#containsRecursive(current.left, key);
+		if (key > current.data) return this.#contains(current.right, key);
+		else return this.#contains(current.left, key);
 	}
 
+	#remove(root, value) {
+		if (!root) return null;
+
+		if (value < root.data) root.left = this.#remove(root.left, value);
+		else if (value > root.data)
+			root.right = this.#remove(root.right, value);
+		else {
+			if (!root.left && !root.right) return null;
+			if (!root.left) return root.right;
+			if (!root.right) return root.left;
+
+			const minRight = this.#minValue(root.right);
+			root.data = minRight;
+			root.right = this.#remove(root.right, minRight);
+		}
+
+		return root;
+	}
+
+	#minValue(node) {
+		while (node.left) node = node.left;
+		return node.data;
+	}
 
 	// interface
 
@@ -87,7 +109,7 @@ class BinarySearchTree {
 			return;
 		}
 
-		this.#insertRecursive(this.#root, key);
+		this.#insert(this.#root, key);
 	}
 
 	// iterative contains
@@ -107,7 +129,7 @@ class BinarySearchTree {
 	// recursive contains
 
 	contains(key) {
-		return this.#containsRecursive(this.#root, key);
+		return this.#contains(this.#root, key);
 	}
 
 	levelOrder(root = this.#root) {
@@ -167,46 +189,7 @@ class BinarySearchTree {
 	}
 
 	remove(key) {
-		let parent = null;
-		let current = this.#root;
-
-		while (current && current.data !== key) {
-			parent = current;
-			if (key < current.data) current = current.left;
-			else current = current.right;
-		}
-
-		if (!current) return false;
-
-		if (!current.left && !current.right) {
-			if (!parent) this.#root = null;
-			else if (parent.right === current) parent.right = null;
-			else parent.left = null;
-		} else if (
-			(current.left && !current.right) ||
-			(!current.left && current.right)
-		) {
-			const child = current.left || current.right;
-			if (!parent) this.#root = child;
-			else if (parent.right === current) parent.right = child;
-			else parent.left = child;
-		} else {
-			let minElemParent = current;
-			let minElem = current.right;
-
-			while (minElem.left) {
-				minElemParent = minElem;
-				minElem = minElem.left;
-			}
-
-			current.data = minElem.data;
-
-			if (minElemParent.left === minElem)
-				minElemParent.left = minElem.right;
-			else minElemParent.right = minElem.right;
-		}
-
-		return true;
+		this.#root = this.#remove(this.#root, key);
 	}
 
 	isEmpty() {

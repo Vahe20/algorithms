@@ -14,39 +14,6 @@ A simple implementation of a doubly linked list in JavaScript with common operat
 * Get the list size (size)
 * Print the list for debugging (print)
 
-## Usage
-```js
-const list = new LinkedList([10, 20, 30]);
-
-// Add elements
-list.push_back(40);
-list.push_front(5);
-
-// Insert at index
-list.insert(2, 15); // insert 15 at index 2
-
-// Access elements
-console.log(list.front()); // 5
-console.log(list.back());  // 40
-console.log(list.at(2));   // 15
-
-// Remove elements
-list.remove(20);           // remove value 20
-list.pop_front();          // remove first element
-list.pop_back();           // remove last element
-
-// Reverse the list
-list.reverse();
-
-// Sort the list
-list.sort((a, b) => a - b); // ascending numeric sort
-
-// Print list
-list.visualize(); // < 5 > < 10 > < 15 > null
-
-// Check size
-console.log(list.size()); // 3
-```
 
 ## Methods
 * push_front(value) — Adds a new node at the beginning of the list
