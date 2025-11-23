@@ -55,7 +55,7 @@ class Queue {
 	// interface
 
 	enqueue(value) {
-		if (!value) throw new Error("Cannot enqueue undefined value");
+		if (!value && value !== 0) throw new Error("Cannot enqueue undefined value");
 		if (this.isFull()) throw new Error("Queue overflow");
 		this.#writeToBuffer(value);
 	}
